@@ -1,0 +1,43 @@
+{% load widget_tweaks %}
+{% block title %}Log in | {% endblock %}
+
+{% block content %}
+
+<head>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<div class="p-10 lg:p-20 text-center">
+    <h1 class="text-3xl lg:text-6xl text-black">Log in</h1>
+</div>
+
+<form method="post" action="." class="lg:w-1/4 px-4 mx-auto" style="max-width: 300px;">
+    {% csrf_token %}
+
+    <div class="mb-5">
+        <label class="text-black">Username or Email</label>
+        {{ form.username|add_class:"w-full mt-2 px-4 py-2 bg-white text-black" }}
+    </div>
+
+    <div class="mb-5">
+        <label class="text-black">{{ form.password.label }}</label>
+        {{ form.password|add_class:"w-full mt-2 px-4 py-2 bg-white text-black" }}
+    </div>
+
+    {% if form.non_field_errors %}
+    <div class="mb-5 p-4 rounded-xl bg-red-300 text-white">
+        {{ form.non_field_errors }}
+    </div>
+    {% elif form.password.errors %}
+    <div class="mb-5 p-4 rounded-xl bg-red-300 text-white">
+        {{ form.password.errors }}
+    </div>
+    {% endif %}
+
+    <button class="px-5 py-3 rounded-xl text-black"
+        style="background-color: transparent; border: 1.5px solid #000000; border-radius: 8px">Log in</button>
+    <div style="display: flex; align-items: center; margin-top: 15px; justify-content: center;">
+        <h1>OR</h1>
+    </div>
+
+</form>
+{% endblock %}
