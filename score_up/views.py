@@ -20,7 +20,7 @@ class SignupView(APIView):
             return Response({"error": "A user with this email already exists."}, status=status.HTTP_400_BAD_REQUEST)
         
         # Create a new user
-        user = User.objects.create_user(email, password)
+        user = User.objects.create_user(username=email, email=email, password=password, first_name=first_name, last_name=last_name)
         user.first_name = first_name
         user.last_name = last_name
         user.save()
