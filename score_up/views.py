@@ -6,6 +6,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework import permissions
+from django.http import JsonResponse
+from django.views import View
+from pathlib import Path
+
 
 
 class SignupView(APIView):
@@ -57,6 +62,39 @@ class LoginView(APIView):
             # Authentication failed
             return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
 
-        
+class MeView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        user = User.objects.get(email=request.user.email)
+        return Response({
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+        }, status=status.HTTP_200_OK)
+    
 def frontpage(request):
         return render(request, 'frontpage.html')
+
+class CreditCheckItemView(View):
+    def get(self, request):
+        credit_check_item = ["EQF Software Quality - Credit Inquiry", "CBCINNOVIS - Credit Inquiry", "United Bank - Consumer Account"]
+
+        # convert your list to json and return it
+        return JsonResponse({'labels': credit_check_item}, safe=False)
+
+class DisputeReasonItemView(View):
+    def get(self, request):
+        dispute_item = ["This inquiry is not authorized, please remove it. (Recommended)", " Please verify this information or remove it.", "This information is due to identity theft, please remove it."]
+        # convert your list to json and return it
+        return JsonResponse({'details': dispute_item}, safe=False)
+    
+class EmailTemplateItemView(View):
+    def get(self, request):
+        #identity_theft_letter = Path('dispute letters/identity-theft.txt').read_text()
+        unauthorized_inquiry_letter = Path('score_up/dispute letters/unauthorized-inquiry.txt').read_text()
+        #verify_information_letter = Path('dispute letters/verify-information.txt').read_text()
+        #email_template_item = [identity_theft_letter, unauthorized_inquiry_letter, verify_information_letter ]
+        email_template_item = unauthorized_inquiry_letter
+        # convert your list to json and return it
+        return JsonResponse({'labels': email_template_item}, safe=False)

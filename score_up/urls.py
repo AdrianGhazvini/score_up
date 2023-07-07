@@ -18,8 +18,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from . import views
-from .views import LoginView
-from .views import SignupView
+from .views import LoginView, SignupView, CreditCheckItemView, DisputeReasonItemView, EmailTemplateItemView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
@@ -30,4 +29,8 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/auth/me/', views.MeView.as_view(), name='me'),
+    path('api/content/credit-check-item/', CreditCheckItemView.as_view(), name='credit-check-item'),
+    path('api/content/dispute-reason-item/', DisputeReasonItemView.as_view(), name='dispute-reason-item'),
+    path('api/content/email-template-item/', EmailTemplateItemView.as_view(), name='email-template-item'),
 ]
