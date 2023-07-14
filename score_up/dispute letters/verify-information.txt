@@ -1,20 +1,18 @@
-Equifax 
-P.O. Box 740256
-Atlanta, GA 30374-0256 
-Date: July 06, 2023
+<credit_agency>
+<agency_address>
+<current_date>
+From: <first_name>
 
-
-Dear Equifax: 
+Dear <credit_agency>: 
 I pulled my credit report and noticed that there are items that are not right.
 
 I saw these inquiries are on my credit report, and you need to remove them because they are inaccurate, incomplete or unverifiable:
-Inquiry from LENDMARK FINANCIAL S, Note: HARD Inquiry - 2023-03-28, Date: 03/28/2023
+Inquiry from <credit_item>.
+
 Please verify this information or remove it.
 
 I want my credit report to be accurate and by law you need to remove accounts that are inaccurate, incomplete or unverifiable. If you verify the information, please respond with verifiable proof of an original consumer contract with my signature that you have on file for the accounts above. Unverifiable accounts must be removed. 
 
 Sincerely, 
-
-Insert name here
-DOB: Insert DOB here
+<first_name>
 
